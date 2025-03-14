@@ -1,6 +1,6 @@
 Learning microservice and code standard
 
-## Maven Commands used in the course
+## Maven Commands used in this learning microservices course
 
 |     Maven Command       |     Description          |
 | ------------- | ------------- |
@@ -9,7 +9,7 @@ Learning microservice and code standard
 | "mvn spring-boot:build-image" | To generate a docker image using Buildpacks. No need of Dockerfile |
 | "mvn compile jib:dockerBuild" | To generate a docker image using Google Jib. No need of Dockerfile |
 
-## Docker Commands used in the course
+## Docker Commands used in this learning microservices course
 
 |     Docker Command       |     Description          |
 | ------------- | ------------- |
