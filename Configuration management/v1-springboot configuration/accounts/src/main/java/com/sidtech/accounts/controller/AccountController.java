@@ -1,10 +1,7 @@
 package com.sidtech.accounts.controller;
 
 import com.sidtech.accounts.constant.AccountConstant;
-import com.sidtech.accounts.dto.AccountDto;
-import com.sidtech.accounts.dto.CustomerDto;
-import com.sidtech.accounts.dto.ErrorResponseDto;
-import com.sidtech.accounts.dto.ResponseDto;
+import com.sidtech.accounts.dto.*;
 import com.sidtech.accounts.service.IAccountService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -35,6 +32,7 @@ public class AccountController
 {
     private final IAccountService accountService;
 
+    @Autowired
     public AccountController(IAccountService accountService) {
         this.accountService = accountService;
     }
@@ -42,7 +40,10 @@ public class AccountController
     @Autowired
     private Environment environment;
 
-    @Value("${build.Version}")
+    @Autowired
+    private AccountsContactInfoDto accountsContactInfoDto;
+
+    @Value("${build.version}")
     private String buildVersion;
 
     @Operation(
@@ -190,6 +191,31 @@ public class AccountController
     @GetMapping("/java-version")
     public ResponseEntity<String> getJavaVersion()
     {
-        return ResponseEntity.status(HttpStatus.OK).body(environment.getProperty("JAVA_HOME"));
+        return ResponseEntity.status(HttpStatus.OK).body(environment.getProperty("MAVEN_HOME"));
+    }
+
+    @Operation(
+            summary = "Get Contact Info",
+            description = "Contact Info details that can be reached out in case of any issues"
+    )
+    @ApiResponses({
+            @ApiResponse(
+                    responseCode = "200",
+                    description = "HTTP Status OK"
+            ),
+            @ApiResponse(
+                    responseCode = "500",
+                    description = "HTTP Status Internal Server Error",
+                    content = @Content(
+                            schema = @Schema(implementation = ErrorResponseDto.class)
+                    )
+            )
+    }
+    )
+    @GetMapping("/contact-info")
+    public ResponseEntity<AccountsContactInfoDto> getContactInfo() {
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(accountsContactInfoDto);
     }
 }
