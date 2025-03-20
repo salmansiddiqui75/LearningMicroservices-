@@ -108,7 +108,7 @@
                 <version>3.4.4</version>
                 <configuration>
                     <to>
-                        <image>salmansid/${project.artifactId}</image>
+                        <image>salmansid/${project.artifactId}:s6</image>
                     </to>
                 </configuration>
             </plugin>
